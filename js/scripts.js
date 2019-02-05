@@ -1,5 +1,38 @@
-$( document ).ready(function() { // Starts jQuery
-    console.log( "ready!" );
-    alert("hello");
+$(document).ready(function() { // Starts jQuery
+  
+    $.ajax({
+        url: 'https://randomuser.me/api/?results=12',
+        dataType: 'json',
+        success: function (data) {
+            var user = data.results[0].user;
+            console.log(data.results);
+
+            $.each( obj, function( key, value ) {
+  
+            
+    
+            // Assign Data
+            // Image
+            // var image = '<img src=' + user.picture + '>';
+            // $("#user_photo").append(image);
+            // $("#userP").append(image);
+            // First and Last Name
+            // var name = = '<p> + (user.name.first) +  </p>' '>';
+
+            // Email
+            // City or location
+
+            
+            // $('#user_value').html(user.name.first + ' ' + user.name.last);
+    
+            // $('li[data-label="location"]').attr('data-value', user.location.street);
+            //$('#gallery').html(image);
+    
+        }
+    });
+  
+    
 }); // Ends jQuery
 
+
+// https://randomuser.me/api/?results=12
