@@ -6,11 +6,13 @@ $(document).ready(function() { // Starts jQuery
         success: function (data) {
             var user = data.results[0].user;
             console.log(data.results);
+            $('#gallery').append('<div class="card"></div>');
+            $('.card').append('<div class="card-img-container"></div>');
+            $('.card-img-container').append('<img class="card-img" src="https://placehold.it/90x90" alt="profile picture"></div>');
 
-            $.each( obj, function( key, value ) {
-  
-            
-    
+
+;
+            //$.each( obj, function( key, value ) {
             // Assign Data
             // Image
             // var image = '<img src=' + user.picture + '>';
