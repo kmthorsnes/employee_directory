@@ -29,11 +29,11 @@ $(document).ready(function() { // Starts jQuery
             let email = data.results[i].email;
             let mediumPhoto = data.results[i].picture.medium;
             $('#gallery').append("<div class='card"+i+"'></div>");
-            $('.card'+i).append('<div class="card-img-container'+i+'"></div>');
-            //$('.card"+i+"').append('<div class="card-info-container'+i+'"></div>');
-            //$('.card-img-container').append('<img class="card-img" src='+ mediumPhoto + ' alt="profile picture"></div>');    
-           // $('.card-info-container').append('<h3 id="name" class="card-name cap">'+ firstName +" " + lastName +'</h3>');
-          // $('.card-info-container'+i+'').append('<p class="card-text'+i+'">'+email+'</p>');    
+            $('.card'+(i)).append('<div class="card-img-container'+i+'"></div>');
+            $('.card'+(i)).append('<div class="card-info-container'+i+'"></div>');
+            $('.card-img-container'+(i)).append('<img class="card-img" src='+ mediumPhoto + ' alt="profile picture"></div>');    
+            $('.card-info-container'+(i)).append('<h3 id="name" class="card-name cap">'+ firstName +" " + lastName +'</h3>');
+            $('.card-info-container'+(i)).append('<p class="card-text'+i+'">'+email+'</p>');    
         });
         }
            
