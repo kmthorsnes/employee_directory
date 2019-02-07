@@ -129,71 +129,45 @@ $(document).ready(function() {
         console.log(data.results.length);
         $(".modal-close-btn").click(function() {
           $(".modal-container").remove();
-          console.log('jeg er en pikk');
-          
-
+          console.log("jeg er en pikk");
         });
 
         $(".modal-prev").click(function() {
-            if (e != 0) {
-                console.log("jeg er en prev")
-                showPerson(e+1);
-            }
-            
-        
+          if (e != 0) {
+            console.log("jeg er en prev");
+            showPerson(e - 1);
+          }
         });
-    
-          $(".modal-next").click(function() {
-            if (e != data.results.length-1) {
-                console.log("jeg er en next");
-                showPerson(e+1);
-            }
-          });
+
+        $(".modal-next").click(function() {
+          if (e != data.results.length - 1) {
+            console.log("jeg er en next");
+            showPerson(e + 1);
+          }
+        });
       }
 
-        //fjern knappen hvis siste delen eller første delen av rekken 
-
+      //fjern knappen hvis siste delen eller første delen av rekken
 
       // Creating click event
       $(".card").click(function() {
         showPerson($(this).index());
-
-
-        //     $("#gallery").append(
-        //     '<div class="modal-container">'+
-        //      '<div class="modal">'          +
-        //       '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>'+
-        //          '<div class="modal-info-container">'+
-        //               '<img class="modal-img" src="'+data.results[selected].picture.large+'" alt="profile picture">'+
-        //               '<h3 id="name" class="modal-name cap">'+data.results[selected].name.first+" " +data.results[selected].name.last+  '</h3>'+
-        //               '<p class="modal-text"><a href="mailto:' +
-        //               data.results[selected].email +
-        //               '?Subject=Hello%20again" target="_top" style="text-decoration:none">' +
-        //               data.results[selected].email +
-        //               '</a></p>'+
-        //               '<p class="modal-text cap">'+data.results[selected].location.city+'</p>'+
-        //               '<hr>'+
-        //               '<p class="modal-text"><a style="text-decoration:none" href="tel:'+data.results[selected].cell+'">'+data.results[selected].cell+'</a></p>'+
-        //               '<p class="modal-text">'+data.results[selected].location.street+", "+data.results[selected].location.state+". "+data.results[selected].nat+ '</p>'+
-        //         '</div>'+
-        //       '</div>'+
-
-        //       '<div class="modal-btn-container">'+
-        //           '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button>'+
-        //           '<button type="button" id="modal-next" class="modal-next btn">Next</button>'+
-        //       '</div>'+
-        //   '</div>');
-
-        //   console.log(selected);
-        //   $('.modal-close-btn').click(function() {
-        //       $('.modal-container').remove();
-        //   });
       });
 
-      
+      $('.search-container').append(
+        '<form action="#" method="get">'+
+                            '<input type="search" id="search-input" class="search-input" placeholder="Search...">'+
+                            '<input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">'+
+                        '</form>'
+        );
+
+
     }
+
+    // search functionality
+    
+
+
+
   });
 }); // Ends jQuery
-
-// https://randomuser.me/api/?results=12
-//https://codepen.io/jaywolters/pen/GpZvLr
