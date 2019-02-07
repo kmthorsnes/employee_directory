@@ -79,40 +79,118 @@ $(document).ready(function() {
           .addClass(".card-info-container");
       });
 
-    //  Creating modal
-      
+      //  Creating modal
 
-
-    // Creating click event
-    $('.card').click(function() {
+      function showPerson(e) {
         $("#gallery").append(
-            '<div class="modal-container">'+
-             '<div class="modal">'          + 
-              '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>'+
-                 '<div class="modal-info-container">'+
-                      '<img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">'+
-                      '<h3 id="name" class="modal-name cap">name</h3>'+
-                      '<p class="modal-text">email</p>'+
-                      '<p class="modal-text cap">'+data.results[$(this)].location.city+'</p>'+
-                      '<hr>'+
-                      '<p class="modal-text">(555) 555-5555</p>'+
-                      '<p class="modal-text">123 Portland Ave., Portland, OR 97204</p>'+
-                      '<p class="modal-text">Birthday: 10/21/2015</p>'+
-                  '</div>'+
-              '</div>'+
-             
-              '<div class="modal-btn-container">'+
-                  '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button>'+
-                  '<button type="button" id="modal-next" class="modal-next btn">Next</button>'+
-              '</div>'+
-          '</div>');
-          $('.modal-close-btn').click(function() {
-              $('.modal-container').remove();
+          '<div class="modal-container">' +
+            '<div class="modal">' +
+            '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>' +
+            '<div class="modal-info-container">' +
+            '<img class="modal-img" src="' +
+            data.results[e].picture.large +
+            '" alt="profile picture">' +
+            '<h3 id="name" class="modal-name cap">' +
+            data.results[e].name.first +
+            " " +
+            data.results[e].name.last +
+            "</h3>" +
+            '<p class="modal-text"><a href="mailto:' +
+            data.results[e].email +
+            '?Subject=Hello%20again" target="_top" style="text-decoration:none">' +
+            data.results[e].email +
+            "</a></p>" +
+            '<p class="modal-text cap">' +
+            data.results[e].location.city +
+            "</p>" +
+            "<hr>" +
+            '<p class="modal-text"><a style="text-decoration:none" href="tel:' +
+            data.results[e].cell +
+            '">' +
+            data.results[e].cell +
+            "</a></p>" +
+            '<p class="modal-text">' +
+            data.results[e].location.street +
+            ", " +
+            data.results[e].location.state +
+            ". " +
+            data.results[e].nat +
+            "</p>" +
+            "</div>" +
+            "</div>" +
+            '<div class="modal-btn-container">' +
+            '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button>' +
+            '<button type="button" id="modal-next" class="modal-next btn">Next</button>' +
+            "</div>" +
+            "</div>"
+        );
+
+        console.log(e);
+        console.log(data.results.length);
+        $(".modal-close-btn").click(function() {
+          $(".modal-container").remove();
+          console.log('jeg er en pikk');
+          
+
+        });
+
+        $(".modal-prev").click(function() {
+            if (e != 0) {
+                console.log("jeg er en prev")
+                showPerson(e+1);
+            }
+            
+        
+        });
+    
+          $(".modal-next").click(function() {
+            if (e != data.results.length-1) {
+                console.log("jeg er en next");
+                showPerson(e+1);
+            }
           });
- 
-    });
+      }
+
+        //fjern knappen hvis siste delen eller første delen av rekken 
 
 
+      // Creating click event
+      $(".card").click(function() {
+        showPerson($(this).index());
+
+
+        //     $("#gallery").append(
+        //     '<div class="modal-container">'+
+        //      '<div class="modal">'          +
+        //       '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>'+
+        //          '<div class="modal-info-container">'+
+        //               '<img class="modal-img" src="'+data.results[selected].picture.large+'" alt="profile picture">'+
+        //               '<h3 id="name" class="modal-name cap">'+data.results[selected].name.first+" " +data.results[selected].name.last+  '</h3>'+
+        //               '<p class="modal-text"><a href="mailto:' +
+        //               data.results[selected].email +
+        //               '?Subject=Hello%20again" target="_top" style="text-decoration:none">' +
+        //               data.results[selected].email +
+        //               '</a></p>'+
+        //               '<p class="modal-text cap">'+data.results[selected].location.city+'</p>'+
+        //               '<hr>'+
+        //               '<p class="modal-text"><a style="text-decoration:none" href="tel:'+data.results[selected].cell+'">'+data.results[selected].cell+'</a></p>'+
+        //               '<p class="modal-text">'+data.results[selected].location.street+", "+data.results[selected].location.state+". "+data.results[selected].nat+ '</p>'+
+        //         '</div>'+
+        //       '</div>'+
+
+        //       '<div class="modal-btn-container">'+
+        //           '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button>'+
+        //           '<button type="button" id="modal-next" class="modal-next btn">Next</button>'+
+        //       '</div>'+
+        //   '</div>');
+
+        //   console.log(selected);
+        //   $('.modal-close-btn').click(function() {
+        //       $('.modal-container').remove();
+        //   });
+      });
+
+      
     }
   });
 }); // Ends jQuery
