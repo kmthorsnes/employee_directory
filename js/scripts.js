@@ -22,7 +22,7 @@ $(document).ready(function() {
     dataType: "json",
     success: function(data) {
       $.each(data.results, function(i) {
-        console.log(data.results[i].name.first);
+        console.log(data.results);
         let firstName = data.results[i].name.first;
         let lastName = data.results[i].name.last;
         let email = data.results[i].email;
@@ -77,10 +77,6 @@ $(document).ready(function() {
         $(".card-info-container" + i)
           .removeClass(".card-info-container" + i)
           .addClass(".card-info-container");
-
-          
-
-
 
       });
 
@@ -170,15 +166,30 @@ $(document).ready(function() {
         
         $("#search-submit").click(function() {
             input = document.getElementById("search-input");
-
             filter = input.value.toLocaleUpperCase();
-            inputArray = [];
+            NewArray = [];
             console.log(filter);
             //showPerson($(this).index());
-            a = getElementsById("name")[0];
-            for (i = 0; i < li.length; i++) {
+            cardDivs = document.getElementsByClassName("card");
+            console.log(cardDivs);
+            for (i = 0; i < cardDivs.length; i++) {
+                  
+                //   console.log(a.innerText.toLocaleUpperCase())
+                //   console.log(filter);
+                if (cardDivs[i].textContent.toLocaleUpperCase().indexOf(filter) >= 0) {
+                NewArray.push(cardDivs[i]);
+                cardDivs[i].style.display = "block";
+                console.log('treff');
+                console.log(NewArray);
+   // // // if no match style is set to not be displayet
+                } else {
+                cardDivs[i].style.display = "none";
+                console.log('ikke treff');
+                 }    
+            }
             
-            if (filter = )
+
+
           });
 
       
