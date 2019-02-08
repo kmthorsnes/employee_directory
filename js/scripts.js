@@ -77,6 +77,11 @@ $(document).ready(function() {
         $(".card-info-container" + i)
           .removeClass(".card-info-container" + i)
           .addClass(".card-info-container");
+
+          
+
+
+
       });
 
       //  Creating modal
@@ -135,6 +140,7 @@ $(document).ready(function() {
         $(".modal-prev").click(function() {
           if (e != 0) {
             console.log("jeg er en prev");
+            $(".modal-container").remove();
             showPerson(e - 1);
           }
         });
@@ -142,6 +148,7 @@ $(document).ready(function() {
         $(".modal-next").click(function() {
           if (e != data.results.length - 1) {
             console.log("jeg er en next");
+            $(".modal-container").remove();
             showPerson(e + 1);
           }
         });
@@ -157,10 +164,24 @@ $(document).ready(function() {
       $('.search-container').append(
         '<form action="#" method="get">'+
                             '<input type="search" id="search-input" class="search-input" placeholder="Search...">'+
-                            '<input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">'+
+                            '<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">'+
                         '</form>'
         );
+        
+        $("#search-submit").click(function() {
+            input = document.getElementById("search-input");
 
+            filter = input.value.toLocaleUpperCase();
+            inputArray = [];
+            console.log(filter);
+            //showPerson($(this).index());
+            a = getElementsById("name")[0];
+            for (i = 0; i < li.length; i++) {
+            
+            if (filter = )
+          });
+
+      
 
     }
 
