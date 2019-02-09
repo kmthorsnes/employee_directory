@@ -15,7 +15,7 @@ $(document).ready(function() {
 
   // clickhørere.
   numberArray = [];
-  numbersOfUsers = 30;
+  numbersOfUsers = 12;
   //end helper methods
 
   $.ajax({
@@ -133,6 +133,17 @@ $(document).ready(function() {
         console.log("position", position);
         console.log("neste", position+1); 
         console.log("neste innhold", numberArray[position+1]);
+        
+
+        if (position == 0) {
+          console.log("dette er den første");
+          $('.modal-prev').hide();
+        }
+
+        if (position == numberArray.length-1) {
+          console.log("dette er den siste");
+          $('.modal-next').hide();
+        }
 
         console.log("event",e);
         $(".modal-close-btn").click(function() {
@@ -162,26 +173,25 @@ $(document).ready(function() {
         });
       }
 
-      //fjern knappen hvis siste delen eller første delen av rekken
 
+    
       // Creating click event
       $(".card").click(function() {
         showPerson($(this).index());
       });
 
+      
       $(".search-container").append(
         '<form action="#" method="get">' +
           '<input type="search" id="search-input" class="search-input" placeholder="Search...">' +
           "</form>"
       );
 
-      $("#search-input").keyup(function(e) {
+      $("#search-input").on("input", function(e) {
         input = document.getElementById("search-input");
         filter = input.value.toLocaleUpperCase();
         numberArray = [];
         cardDivs = $(".card");
-        cardDivs.removeClass("hide");
-        cardDivs.removeClass("show");
         console.log("jeg er en fis");
         console.log(numberArray);
         for (i = 0; i < cardDivs.length; i++) {
@@ -201,4 +211,6 @@ $(document).ready(function() {
       });
     }
   });
+  $('h1').css({'font-family':'Poppins'});
+  document.body.style.backgroundColor = "#ffefd7";
 }); // Ends jQuery
