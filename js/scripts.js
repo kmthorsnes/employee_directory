@@ -1,43 +1,36 @@
+// Starts jQuery
 $(document).ready(function() {
-  // Starts jQuery
+  // Creates empty array for pushing index into.
+  indexArray = [];
 
-  //helper methods
-
-  //   function createModal(e) {
-  //     $("#gallery").append('<div class="modal-container"></div>');
-  //     $(".modal-container").append('<div class="card-img-container"></div>');
-  //     $(".card-img-container").append(
-  //       '<img class="card-img" src="https://placehold.it/90x90" alt="profile picture"></img>'
-  //     );
-  //   }
-
-  //funksjon for å lage modalvindu
-
-  // clickhørere.
-  numberArray = [];
+  // For setting numbers of users to be generated
   numbersOfUsers = 12;
-  //end helper methods
 
+  // Get users from randomuser.me
   $.ajax({
-    url: "https://randomuser.me/api/?results="+numbersOfUsers,
+    url: "https://randomuser.me/api/?results=" + numbersOfUsers,
     dataType: "json",
     success: function(data) {
       $.each(data.results, function(i) {
-        numberArray.push(i);        
+        // push each person's index into the array
+        indexArray.push(i);
         let firstName = data.results[i].name.first;
         let lastName = data.results[i].name.last;
         let email = data.results[i].email;
         let mediumPhoto = data.results[i].picture.medium;
+        // Capitalizing the first letters of each word in city and state. Codebase from: https://stackoverflow.com/a/43376967
         let city = data.results[i].location.city
           .toLowerCase()
           .split(" ")
-          .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
         let state = data.results[i].location.state
           .toLowerCase()
           .split(" ")
-          .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
+
+        // Creating card divs and inserting data for each
         $("#gallery").append("<div class='card" + i + "'></div>");
         $(".card" + i).append(
           '<div class="card-img-container' + i + '"></div>'
@@ -57,6 +50,7 @@ $(document).ready(function() {
             lastName +
             "</h3>"
         );
+        // Adds email as hyperlinked mailto
         $(".card-info-container" + i).append(
           '<p class="card-text' +
             i +
@@ -69,22 +63,13 @@ $(document).ready(function() {
         $(".card-info-container" + i).append(
           '<p class="card-text cap' + i + '">' + city + ", " + state + "</p>"
         );
-        $(".card" + i)
-          .removeClass("'.card'+(i)")
-          .addClass("card");
-        $(".card-img-container" + i)
-          .removeClass(".card-img-container" + i)
-          .addClass(".card-img-container");
-        $(".card-info-container" + i)
-          .removeClass(".card-info-container" + i)
-          .addClass(".card-info-container");
+        // adds class for getting correct CSS
+        $(".card" + i).addClass("card");
+        $(".card-img-container" + i).addClass(".card-img-container");
+        $(".card-info-container" + i).addClass(".card-info-container");
       });
 
-      console.log(data.results);
-      console.log(numberArray);
-
       //  Creating modal
-
       function showPerson(e) {
         $("#gallery").append(
           '<div class="modal-container">' +
@@ -128,72 +113,60 @@ $(document).ready(function() {
             "</div>" +
             "</div>"
         );
-        position = numberArray.indexOf(e);
-        console.log("Numberarray", numberArray);
-        console.log("position", position);
-        console.log("neste", position+1); 
-        console.log("neste innhold", numberArray[position+1]);
-        
 
+        position = indexArray.indexOf(e);
+        // If the person is the first in the array, the prev-button is hidden.
         if (position == 0) {
-          console.log("dette er den første");
-          $('.modal-prev').hide();
+          $(".modal-prev").hide();
         }
 
-        if (position == numberArray.length-1) {
-          console.log("dette er den siste");
-          $('.modal-next').hide();
+        // If the person is the last in the array, the prev-button is hidden.
+        if (position == indexArray.length - 1) {
+          $(".modal-next").hide();
         }
 
-        console.log("event",e);
+        // Removes the modal if exit button is clicked
         $(".modal-close-btn").click(function() {
           $(".modal-container").remove();
-          
-
         });
 
+        // Shows the previous person if the person showing is not the first in the array/filtered
         $(".modal-prev").click(function() {
-          console.log(position);
           if (position != 0) {
-            console.log("jeg er en prev");
             $(".modal-container").remove();
-            showPerson(numberArray[position-1]);
-            
+            showPerson(indexArray[position - 1]);
           }
         });
 
+        // Shows the next person if the person showing is not the last in the array/filtered
         $(".modal-next").click(function() {
-          
-          console.log(position);
-          if (position != numberArray.length - 1) {
-            console.log("jeg er en next");
+          if (position != indexArray.length - 1) {
             $(".modal-container").remove();
-            showPerson(numberArray[position+1]);
+            showPerson(indexArray[position + 1]);
           }
         });
       }
 
-
-    
-      // Creating click event
+      // Shows modal if card is clicked
       $(".card").click(function() {
         showPerson($(this).index());
       });
 
-      
+      // Exceeds:
+        // Creates search input
       $(".search-container").append(
         '<form action="#" method="get">' +
           '<input type="search" id="search-input" class="search-input" placeholder="Search...">' +
           "</form>"
       );
-
+      // Exceeds: 
+        // Every time something changes in the search field the this function fires
       $("#search-input").on("input", function(e) {
         input = document.getElementById("search-input");
         filter = input.value.toLocaleUpperCase();
-        numberArray = [];
+        // Empties the indexArray
+        indexArray = [];
         cardDivs = $(".card");
-        console.log("jeg er en fis");
-        console.log(numberArray);
         for (i = 0; i < cardDivs.length; i++) {
           if (
             cardDivs[i].textContent.toLocaleUpperCase().indexOf(filter) >= 0
@@ -201,8 +174,10 @@ $(document).ready(function() {
             $(".card")
               .eq(i)
               .show();
-            numberArray.push(i);
+            // If a search match is found the persons index is pushed into the array
+            indexArray.push(i);
           } else {
+            // Hides the persons who are not matching with the search
             $(".card")
               .eq(i)
               .hide();
@@ -211,6 +186,10 @@ $(document).ready(function() {
       });
     }
   });
-  $('h1').css({'font-family':'Poppins'});
+
+  // Exceeds:
+  // Change the font of the h1
+  $("h1").css({ "font-family": "Poppins" });
+  // Change the background-color
   document.body.style.backgroundColor = "#ffefd7";
 }); // Ends jQuery
