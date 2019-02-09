@@ -14,15 +14,16 @@ $(document).ready(function() {
   //funksjon for å lage modalvindu
 
   // clickhørere.
-
+  numberArray = [];
+  numbersOfUsers = 30;
   //end helper methods
 
   $.ajax({
-    url: "https://randomuser.me/api/?results=12",
+    url: "https://randomuser.me/api/?results="+numbersOfUsers,
     dataType: "json",
     success: function(data) {
       $.each(data.results, function(i) {
-        console.log(data.results);
+        numberArray.push(i);        
         let firstName = data.results[i].name.first;
         let lastName = data.results[i].name.last;
         let email = data.results[i].email;
@@ -77,8 +78,10 @@ $(document).ready(function() {
         $(".card-info-container" + i)
           .removeClass(".card-info-container" + i)
           .addClass(".card-info-container");
-
       });
+
+      console.log(data.results);
+      console.log(numberArray);
 
       //  Creating modal
 
@@ -125,27 +128,36 @@ $(document).ready(function() {
             "</div>" +
             "</div>"
         );
+        position = numberArray.indexOf(e);
+        console.log("Numberarray", numberArray);
+        console.log("position", position);
+        console.log("neste", position+1); 
+        console.log("neste innhold", numberArray[position+1]);
 
-        console.log(e);
-        console.log(data.results.length);
+        console.log("event",e);
         $(".modal-close-btn").click(function() {
           $(".modal-container").remove();
-          console.log("det funker");
+          
+
         });
 
         $(".modal-prev").click(function() {
-          if (e != 0) {
+          console.log(position);
+          if (position != 0) {
             console.log("jeg er en prev");
             $(".modal-container").remove();
-            showPerson(e - 1);
+            showPerson(numberArray[position-1]);
+            
           }
         });
 
         $(".modal-next").click(function() {
-          if (e != data.results.length - 1) {
+          
+          console.log(position);
+          if (position != numberArray.length - 1) {
             console.log("jeg er en next");
             $(".modal-container").remove();
-            showPerson(e + 1);
+            showPerson(numberArray[position+1]);
           }
         });
       }
@@ -157,49 +169,36 @@ $(document).ready(function() {
         showPerson($(this).index());
       });
 
-      $('.search-container').append(
-        '<form action="#" method="get">'+
-                            '<input type="search" id="search-input" class="search-input" placeholder="Search...">'+
-                        '</form>'
-        );
-        
-        $("#search-input").keyup(function() {
-            input = document.getElementById("search-input");
-            filter = input.value.toLocaleUpperCase();
-            NewArray = [];
-            //console.log(filter);
-            //showPerson($(this).index());
-            cardDivs = $(".card");
-            console.log('jeg er en fis');
-            for (i = 0; i < cardDivs.length; i++) {
-                  
-                //   console.log(a.innerText.toLocaleUpperCase())
-                //   console.log(filter);
-                if (cardDivs[i].textContent.toLocaleUpperCase().indexOf(filter) >= 0) {
-                //NewArray.push(cardDivs[i]);
-                
-                //cardDivs[i].style.display = "block";
-                //console.log('treff');
-                //console.log(NewArray);
-   // // // if no match style is set to not be displayet
-                } else {
-                $(".card").eq(i).hide()
-            //    console.log('ikke treff');
-                 }    
-            }
-            
+      $(".search-container").append(
+        '<form action="#" method="get">' +
+          '<input type="search" id="search-input" class="search-input" placeholder="Search...">' +
+          "</form>"
+      );
 
-
-          });
-
-      
-
+      $("#search-input").keyup(function(e) {
+        input = document.getElementById("search-input");
+        filter = input.value.toLocaleUpperCase();
+        numberArray = [];
+        cardDivs = $(".card");
+        cardDivs.removeClass("hide");
+        cardDivs.removeClass("show");
+        console.log("jeg er en fis");
+        console.log(numberArray);
+        for (i = 0; i < cardDivs.length; i++) {
+          if (
+            cardDivs[i].textContent.toLocaleUpperCase().indexOf(filter) >= 0
+          ) {
+            $(".card")
+              .eq(i)
+              .show();
+            numberArray.push(i);
+          } else {
+            $(".card")
+              .eq(i)
+              .hide();
+          }
+        }
+      });
     }
-
-    // search functionality
-    
-
-
-
   });
 }); // Ends jQuery
