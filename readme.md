@@ -8,8 +8,8 @@ A page that makes use of the [randomuser.me's](https://jquery.com/) public API f
 The user can search and filter employees by their names.
 
 ## Screenshots
-![Demo](https://github.com/kmthorsnes/employee_directory/images.2gif?raw=true)
-![Demo](https://github.com/kmthorsnes/employee_directory/images.1gif?raw=true)
+![Demo](https://github.com/kmthorsnes/employee_directory/images/2gif?raw=true)
+![Demo](https://github.com/kmthorsnes/employee_directory/images/1gif?raw=true)
 
 
 ## Personalization
