@@ -130,7 +130,7 @@ $(document).ready(function() {
         console.log(data.results.length);
         $(".modal-close-btn").click(function() {
           $(".modal-container").remove();
-          console.log("jeg er en pikk");
+          console.log("det funker");
         });
 
         $(".modal-prev").click(function() {
@@ -160,31 +160,31 @@ $(document).ready(function() {
       $('.search-container').append(
         '<form action="#" method="get">'+
                             '<input type="search" id="search-input" class="search-input" placeholder="Search...">'+
-                            '<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">'+
                         '</form>'
         );
         
-        $("#search-submit").click(function() {
+        $("#search-input").keyup(function() {
             input = document.getElementById("search-input");
             filter = input.value.toLocaleUpperCase();
             NewArray = [];
-            console.log(filter);
+            //console.log(filter);
             //showPerson($(this).index());
-            cardDivs = document.getElementsByClassName("card");
-            console.log(cardDivs);
+            cardDivs = $(".card");
+            console.log('jeg er en fis');
             for (i = 0; i < cardDivs.length; i++) {
                   
                 //   console.log(a.innerText.toLocaleUpperCase())
                 //   console.log(filter);
                 if (cardDivs[i].textContent.toLocaleUpperCase().indexOf(filter) >= 0) {
-                NewArray.push(cardDivs[i]);
-                cardDivs[i].style.display = "block";
-                console.log('treff');
-                console.log(NewArray);
+                //NewArray.push(cardDivs[i]);
+                
+                //cardDivs[i].style.display = "block";
+                //console.log('treff');
+                //console.log(NewArray);
    // // // if no match style is set to not be displayet
                 } else {
-                cardDivs[i].style.display = "none";
-                console.log('ikke treff');
+                $(".card").eq(i).hide()
+            //    console.log('ikke treff');
                  }    
             }
             
