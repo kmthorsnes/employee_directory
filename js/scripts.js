@@ -166,10 +166,10 @@ $(document).ready(function() {
         filter = input.value.toLocaleUpperCase();
         // Empties the indexArray
         indexArray = [];
-        cardDivs = $(".card");
-        for (i = 0; i < cardDivs.length; i++) {
+        nameDivs = $(".card-name");
+        for (i = 0; i < nameDivs.length; i++) {
           if (
-            cardDivs[i].textContent.toLocaleUpperCase().indexOf(filter) >= 0
+            nameDivs[i].textContent.toLocaleUpperCase().indexOf(filter) >= 0
           ) {
             $(".card")
               .eq(i)
