@@ -21,6 +21,8 @@ Users can filter which Employees that show by searching for their name.
 Search is updated on every keystroke or the input is cleared (no button eventlistener).
 ### Modal view.
 Button for navigating to the next or previous person is hidden if the person shown is the first or last in the current array view.
+### Hyperlinking.
+Email and telephonenumber is hyperlinked for faster connecting with the persons.
 
 ## Tech/framework used
 **Built with**
