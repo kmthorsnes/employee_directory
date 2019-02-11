@@ -82,7 +82,7 @@ $(document).ready(function() {
             " " +
             data.results[e].name.last +
             "</h3>" +
-            '<p class="modal-text"><a href="mailto:' +
+            '<p class="modal-text-email" id="email"><a href="mailto:' +
             data.results[e].email +
             '?Subject=Hello%20again" target="_top" style="text-decoration:none">' +
             data.results[e].email +
