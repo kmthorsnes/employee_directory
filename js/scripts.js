@@ -6,6 +6,16 @@ $(document).ready(function() {
   // For setting numbers of users to be generated
   numbersOfUsers = 12;
 
+  // Helper function for capitalazing first letter. Codebase from: https://stackoverflow.com/a/43376967
+  const toCapitalLetter = (e) => {
+    return e
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+
   // Get users from randomuser.me
   $.ajax({
     url: "https://randomuser.me/api/?results=" + numbersOfUsers +"&nat=us,dk,no,gb,de",
@@ -19,16 +29,9 @@ $(document).ready(function() {
         let email = data.results[i].email;
         let mediumPhoto = data.results[i].picture.medium;
         // Capitalizing the first letters of each word in city and state. Codebase from: https://stackoverflow.com/a/43376967
-        let city = data.results[i].location.city
-          .toLowerCase()
-          .split(" ")
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
-        let state = data.results[i].location.state
-          .toLowerCase()
-          .split(" ")
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
+        let city = toCapitalLetter(data.results[i].location.city);
+        let state = toCapitalLetter(data.results[i].location.state);
+
 
         // Creating card divs and inserting data for each
         $("#gallery").append("<div class='card" + i + "'></div>");
@@ -92,10 +95,7 @@ $(document).ready(function() {
             '<p class="modal-text cap">' +
             data.results[e].location.postcode +
             " " +
-            data.results[e].location.city.toLowerCase()
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ") +
+            toCapitalLetter(data.results[e].location.city)+
             "</p>" +
             "<hr>" +
             '<p class="modal-text"><a style="text-decoration:none" href="tel:' +
@@ -104,16 +104,9 @@ $(document).ready(function() {
             data.results[e].cell +
             "</a></p>" +
             '<p class="modal-text">' +
-            data.results[e].location.street.toLowerCase()
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ") +
+            toCapitalLetter(data.results[e].location.street)+
             ", " +
-            data.results[e].location.state
-            .toLowerCase()
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ") +
+            toCapitalLetter(data.results[e].location.state)+
             ". " +
             data.results[e].nat +
             "</p>" +
