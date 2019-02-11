@@ -90,7 +90,12 @@ $(document).ready(function() {
             data.results[e].email +
             "</a></p>" +
             '<p class="modal-text cap">' +
-            data.results[e].location.city +
+            data.results[e].location.postcode +
+            " " +
+            data.results[e].location.city.toLowerCase()
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ") +
             "</p>" +
             "<hr>" +
             '<p class="modal-text"><a style="text-decoration:none" href="tel:' +
@@ -99,12 +104,20 @@ $(document).ready(function() {
             data.results[e].cell +
             "</a></p>" +
             '<p class="modal-text">' +
-            data.results[e].location.street +
+            data.results[e].location.street.toLowerCase()
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ") +
             ", " +
-            data.results[e].location.state +
+            data.results[e].location.state
+            .toLowerCase()
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ") +
             ". " +
             data.results[e].nat +
             "</p>" +
+            "<p class='modal-text'>Birthday: " + data.results[e].dob.date.substring(0,10) + "</p>" +
             "</div>" +
             "</div>" +
             '<div class="modal-btn-container">' +
