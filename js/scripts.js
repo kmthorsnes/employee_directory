@@ -30,7 +30,6 @@ $(document).ready(function() {
         let lastName = data.results[i].name.last;
         let email = data.results[i].email;
         let mediumPhoto = data.results[i].picture.medium;
-        // Capitalizing the first letters of each word in city and state. Codebase from: https://stackoverflow.com/a/43376967
         let city = toCapitalLetter(data.results[i].location.city);
         let state = toCapitalLetter(data.results[i].location.state);
 
