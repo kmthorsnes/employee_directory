@@ -7,18 +7,20 @@ $(document).ready(function() {
   numbersOfUsers = 12;
 
   // Helper function for capitalazing first letter. Codebase from: https://stackoverflow.com/a/43376967
-  const toCapitalLetter = (e) => {
+  const toCapitalLetter = e => {
     return e
       .toLowerCase()
-      .split(' ')
+      .split(" ")
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .join(" ");
   };
-
 
   // Get users from randomuser.me
   $.ajax({
-    url: "https://randomuser.me/api/?results=" + numbersOfUsers +"&nat=us,dk,no,gb,de",
+    url:
+      "https://randomuser.me/api/?results=" +
+      numbersOfUsers +
+      "&nat=us,dk,no,gb,de",
     dataType: "json",
     success: function(data) {
       $.each(data.results, function(i) {
@@ -31,7 +33,6 @@ $(document).ready(function() {
         // Capitalizing the first letters of each word in city and state. Codebase from: https://stackoverflow.com/a/43376967
         let city = toCapitalLetter(data.results[i].location.city);
         let state = toCapitalLetter(data.results[i].location.state);
-
 
         // Creating card divs and inserting data for each
         $("#gallery").append("<div class='card" + i + "'></div>");
@@ -95,7 +96,7 @@ $(document).ready(function() {
             '<p class="modal-text cap">' +
             data.results[e].location.postcode +
             " " +
-            toCapitalLetter(data.results[e].location.city)+
+            toCapitalLetter(data.results[e].location.city) +
             "</p>" +
             "<hr>" +
             '<p class="modal-text"><a style="text-decoration:none" href="tel:' +
@@ -104,13 +105,15 @@ $(document).ready(function() {
             data.results[e].cell +
             "</a></p>" +
             '<p class="modal-text">' +
-            toCapitalLetter(data.results[e].location.street)+
+            toCapitalLetter(data.results[e].location.street) +
             ", " +
-            toCapitalLetter(data.results[e].location.state)+
+            toCapitalLetter(data.results[e].location.state) +
             ". " +
             data.results[e].nat +
             "</p>" +
-            "<p class='modal-text'>Birthday: " + data.results[e].dob.date.substring(0,10) + "</p>" +
+            "<p class='modal-text'>Birthday: " +
+            data.results[e].dob.date.substring(0, 10) +
+            "</p>" +
             "</div>" +
             "</div>" +
             '<div class="modal-btn-container">' +
@@ -159,14 +162,14 @@ $(document).ready(function() {
       });
 
       // Exceeds:
-        // Creates search input
+      // Creates search input
       $(".search-container").append(
         '<form action="#" method="get">' +
           '<input type="search" id="search-input" class="search-input" placeholder="Search...">' +
           "</form>"
       );
-      // Exceeds: 
-        // Every time something changes in the search field the this function fires
+      // Exceeds:
+      // Every time something changes in the search field the this function fires
       $("#search-input").on("input", function(e) {
         input = document.getElementById("search-input");
         filter = input.value.toLocaleUpperCase();
