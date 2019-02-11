@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   // Get users from randomuser.me
   $.ajax({
-    url: "https://randomuser.me/api/?results=" + numbersOfUsers,
+    url: "https://randomuser.me/api/?results=" + numbersOfUsers +"&nat=us,dk,no,gb,de",
     dataType: "json",
     success: function(data) {
       $.each(data.results, function(i) {
