@@ -6,15 +6,6 @@ $(document).ready(function() {
   // For setting numbers of users to be generated
   numbersOfUsers = 12;
 
-  // Helper function for capitalazing first letter. Codebase from: https://stackoverflow.com/a/43376967
-  const toCapitalLetter = e => {
-    return e
-      .toLowerCase()
-      .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
-
   // Get users from randomuser.me
   $.ajax({
     url:
@@ -30,8 +21,8 @@ $(document).ready(function() {
         let lastName = data.results[i].name.last;
         let email = data.results[i].email;
         let mediumPhoto = data.results[i].picture.medium;
-        let city = toCapitalLetter(data.results[i].location.city);
-        let state = toCapitalLetter(data.results[i].location.state);
+        let city = data.results[i].location.city;
+        let state = data.results[i].location.state;
 
         // Creating card divs and inserting data for each
         $("#gallery").append("<div class='card" + i + "'></div>");
@@ -70,6 +61,10 @@ $(document).ready(function() {
         $(".card" + i).addClass("card");
         $(".card-img-container" + i).addClass(".card-img-container");
         $(".card-info-container" + i).addClass(".card-info-container");
+
+        // Exceeds:
+        // sets card text to be capitalized
+        $(".card-text").css({ "text-transform": "capitalize" });
       });
 
       //  Creating modal
@@ -95,7 +90,7 @@ $(document).ready(function() {
             '<p class="modal-text cap">' +
             data.results[e].location.postcode +
             " " +
-            toCapitalLetter(data.results[e].location.city) +
+            data.results[e].location.city +
             "</p>" +
             "<hr>" +
             '<p class="modal-text"><a style="text-decoration:none" href="tel:' +
@@ -104,9 +99,9 @@ $(document).ready(function() {
             data.results[e].cell +
             "</a></p>" +
             '<p class="modal-text">' +
-            toCapitalLetter(data.results[e].location.street) +
+            data.results[e].location.street +
             ", " +
-            toCapitalLetter(data.results[e].location.state) +
+            data.results[e].location.state +
             ". " +
             data.results[e].nat +
             "</p>" +
@@ -121,6 +116,10 @@ $(document).ready(function() {
             "</div>" +
             "</div>"
         );
+
+        // Exceeds:
+        // Sets modal card text to be capitalized
+        $(".modal-text").css({ "text-transform": "capitalize" });
 
         position = indexArray.indexOf(e);
         // If the person is the first in the array, the prev-button is hidden.
